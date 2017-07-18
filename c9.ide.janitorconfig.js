@@ -26,7 +26,6 @@ define(function(require, exports, module) {
         
         function load() {
             readJanitorManifest().then(manifest => {
-                console.log(JSON.parse(manifest))
                 loadSettings(JSON.parse(manifest).scripts);
             }).catch(err => console.error("plugin config", err));
         }
@@ -47,13 +46,8 @@ define(function(require, exports, module) {
                 }
                 i++;
             }
-            console.log(c9runners);
             settings.setJson("project/run/configs", c9runners);
         }
-        
-        /***** Methods *****/
-        
-        load();
         
         /***** Lifecycle *****/
         
@@ -71,7 +65,7 @@ define(function(require, exports, module) {
         });
         
         register(null, {
-            "janitorconfig": plugin
+            "c9.ide.janitorconfig": plugin
         });
     }
 });
