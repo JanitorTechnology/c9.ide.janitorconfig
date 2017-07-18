@@ -1,0 +1,17 @@
+{
+  "name": "c9.ide.janitorconfig",
+  "description": "Configure Cloud9 for Janitor",
+  "version": "0.0.1",
+  "author": "Tim Nguyen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JanitorTechnology/c9.ide.janitorconfig"
+  },
+  "plugins": {
+    "c9.ide.janitorconfig": {
+      "packagePath": "plugins/c9.ide.janitorconfig/c9.ide.janitorconfig",
+    }
+  },
+  "categories": ["miscellaneous"],
+  "licenses": []
+}
