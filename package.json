@@ -9,7 +9,7 @@
   },
   "plugins": {
     "c9.ide.janitorconfig": {
-      "packagePath": "plugins/c9.ide.janitorconfig/c9.ide.janitorconfig",
+      "packagePath": "plugins/c9.ide.janitorconfig/c9.ide.janitorconfig"
     }
   },
   "categories": ["miscellaneous"],
