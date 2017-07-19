@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
     main.consumes = ["settings", "Plugin", "fs"];
-    main.provides = ["janitorconfig"];
+    main.provides = ["c9.ide.janitorconfig"];
     return main;
 
     function main(options, imports, register) {
