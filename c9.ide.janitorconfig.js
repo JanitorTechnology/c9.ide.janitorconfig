@@ -1,5 +1,5 @@
 define(function(require, exports, module) {
-    main.consumes = ["settings", "Plugin", "fs"];
+    main.consumes = ["settings", "Plugin", "fs", "run.gui"];
     main.provides = ["c9.ide.janitorconfig"];
     return main;
 
@@ -7,6 +7,7 @@ define(function(require, exports, module) {
         var settings = imports.settings;
         var Plugin = imports.Plugin;
         var fs = imports.fs;
+        var runGui = imports["run.gui"];
 
         /***** Initialization *****/
         
@@ -85,7 +86,13 @@ define(function(require, exports, module) {
             }
             settings.setJson("project/run/configs", c9runners);
             settings.getEmitter()("project/run/configs");
+
             console.info("[c9.ide.janitorconfig] Finished loading janitor.json scripts.");
+            
+            runGui.on("unload", function() {
+                runGui.load();
+            });
+            runGui.unload();
         }
 
         /***** Lifecycle *****/
