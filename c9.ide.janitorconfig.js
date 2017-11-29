@@ -52,6 +52,7 @@ define(function(require, exports, module) {
         function load() {
             readJanitorManifest().then(manifest => {
                 loadSettings(manifest.scripts);
+                // TODO: Configure 'Preview' button from `manifest.ports` (e.g. VNC, web preview...)
             }).catch(err => {
                 console.error("[c9.ide.janitorconfig] Failed to parse or load janitor.json", err)
             });
@@ -61,18 +62,20 @@ define(function(require, exports, module) {
             let i = 0;
             for (let script in scripts) {
                 if (scripts[script].cmd) {
+                    const cmd = scripts[script].cmd;
                     c9runners[script] = {
-                        "command": scripts[script].cmd,
+                        "command": cmd,
                         "cwd": scripts[script].cwd || "/",
-                        "name": script,
+                        "name": script + ' (' + cmd + ')',
                         "runner": "Shell command",
                         "toolbar": true,
                     };
                 } else if (typeof scripts[script] === "string") {
+                    const cmd = scripts[script];
                     c9runners[script] = {
-                        "command": scripts[script],
+                        "command": cmd,
                         "cwd": "/",
-                        "name": script,
+                        "name": script + ' (' + cmd + ')',
                         "runner": "Shell command",
                         "toolbar": true,
                     };
