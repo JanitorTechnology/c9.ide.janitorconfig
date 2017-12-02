@@ -88,7 +88,6 @@ define(function(require, exports, module) {
                 i++;
             }
             settings.setJson("project/run/configs", c9runners);
-            settings.getEmitter()("project/run/configs");
 
             console.info("[c9.ide.janitorconfig] Finished loading janitor.json scripts.");
             
