@@ -52,7 +52,7 @@ define(function(require, exports, module) {
         function load() {
             readJanitorManifest().then(manifest => {
                 loadSettings(manifest.scripts);
-                // TODO: Configure 'Preview' button from `manifest.ports` (e.g. VNC, web preview...)
+                loadPreview(manifest.ports);
             }).catch(err => {
                 console.error("[c9.ide.janitorconfig] Failed to parse or load janitor.json", err)
             });
@@ -88,7 +88,6 @@ define(function(require, exports, module) {
                 i++;
             }
             settings.setJson("project/run/configs", c9runners);
-            settings.getEmitter()("project/run/configs");
 
             console.info("[c9.ide.janitorconfig] Finished loading janitor.json scripts.");
             
@@ -96,6 +95,24 @@ define(function(require, exports, module) {
                 runGui.load();
             });
             runGui.unload();
+        }
+
+        function loadPreview(ports) {
+            for (let port in ports) {
+                if (ports[port].preview) {
+                    let container;
+                    if (window.location.search.indexOf("container=") !== -1) {
+                        container = window.location.search.split("container=")[1].split("&")[0];
+                    } else {
+                        container = window.location.pathname.split("/")[1];
+                    }
+                    let url = "https://" + window.location.host +
+                      "?container=" + container +
+                      "&port=" + port;
+                    settings.set("project/preview/@url", url);
+                    return;
+                }
+            }
         }
 
         /***** Lifecycle *****/
