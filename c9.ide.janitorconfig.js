@@ -60,22 +60,24 @@ define(function(require, exports, module) {
         function loadSettings(scripts) {
             let c9runners = {};
             let i = 0;
-            for (let script in scripts) {
-                if (scripts[script].cmd) {
-                    const cmd = scripts[script].cmd;
-                    c9runners[script] = {
+            for (let name in scripts) {
+                if (scripts[name].cmd) {
+                    const cmd = scripts[name].cmd;
+                    const fullName = name + ' (' + cmd + ')';
+                    c9runners[fullName] = {
                         "command": cmd,
-                        "cwd": scripts[script].cwd || "/",
-                        "name": script + ' (' + cmd + ')',
+                        "cwd": scripts[name].cwd || "/",
+                        "name": fullName,
                         "runner": "Shell command",
                         "toolbar": true,
                     };
-                } else if (typeof scripts[script] === "string") {
-                    const cmd = scripts[script];
-                    c9runners[script] = {
+                } else if (typeof scripts[name] === "string") {
+                    const cmd = scripts[name];
+                    const fullName = name + ' (' + cmd + ')';
+                    c9runners[fullName] = {
                         "command": cmd,
                         "cwd": "/",
-                        "name": script + ' (' + cmd + ')',
+                        "name": fullName,
                         "runner": "Shell command",
                         "toolbar": true,
                     };
