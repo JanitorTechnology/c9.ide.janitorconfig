@@ -61,19 +61,21 @@ define(function(require, exports, module) {
             let c9runners = {};
             let i = 0;
             for (let name in scripts) {
-                if (scripts[name].cmd) {
-                    const cmd = scripts[name].cmd;
-                    const fullName = name + ' (' + cmd + ')';
+                const script = scripts[name];
+                let fullName = name;
+                if (script.cmd) {
+                    const cmd = script.cmd;
+                    fullName += ' (' + cmd + ')';
                     c9runners[fullName] = {
                         "command": cmd,
-                        "cwd": scripts[name].cwd || "/",
+                        "cwd": script.cwd || "/",
                         "name": fullName,
                         "runner": "Shell command",
                         "toolbar": true,
                     };
-                } else if (typeof scripts[name] === "string") {
-                    const cmd = scripts[name];
-                    const fullName = name + ' (' + cmd + ')';
+                } else if (typeof script === "string") {
+                    const cmd = script;
+                    fullName += ' (' + cmd + ')';
                     c9runners[fullName] = {
                         "command": cmd,
                         "cwd": "/",
@@ -85,7 +87,7 @@ define(function(require, exports, module) {
                     console.error("[c9.ide.janitorconfig]", "Failed to parse script", script);
                 }
                 if (i === 0) {
-                    c9runners[script].default = true;
+                    c9runners[fullName].default = true;
                 }
                 i++;
             }
