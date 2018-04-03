@@ -18,8 +18,10 @@ define(function(require, exports, module) {
             const filePaths = [
                 "~/janitor.json",
                 "~/.janitor.json",
+                "~/.janitor/janitor.json",
                 "/janitor.json",
-                "/.janitor.json"
+                "/.janitor.json",
+                "/.janitor/janitor.json",
             ];
             
             let readFile = function (path) {
